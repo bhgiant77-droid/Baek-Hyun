@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "Service": {
+      "title": "Service",
+      "description": "제공하는 서비스 정보",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "icon": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "description"]
+    },
+    "Portfolio": {
+      "title": "Portfolio",
+      "description": "수행 실적 및 포트폴리오",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "imageUrl"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "고객 문의 내역",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "company": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "contacted", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "웹사이트 전역 설정",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "primaryColor": { "type": "string" },
+        "contactEmail": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "address": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/services": { "schema": "Service", "description": "서비스 목록" },
+    "/portfolio": { "schema": "Portfolio", "description": "포트폴리오 목록" },
+    "/inquiries": { "schema": "Inquiry", "description": "문의 내역" },
+    "/settings": { "schema": "Settings", "description": "사이트 설정" }
+  }
+}
