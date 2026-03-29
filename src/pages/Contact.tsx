@@ -12,11 +12,23 @@ export default function Contact() {
 
   const onSubmit = async (data: any) => {
     try {
+      // Save to Firebase
       await addDoc(collection(db, "inquiries"), {
         ...data,
         status: "pending",
         createdAt: serverTimestamp(),
       });
+
+      // Send to Formspree
+      await fetch("https://formspree.io/f/mvzvkzkp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
       toast.success("문의가 성공적으로 접수되었습니다.");
       setSubmitted(true);
       reset();
@@ -49,7 +61,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold mb-1">이메일 문의</h4>
-                    <p className="text-gray-500">contact@risk-assessment.kr</p>
+                    <p className="text-gray-500">bhgiant@naver.com</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
